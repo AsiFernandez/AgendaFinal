@@ -7,7 +7,14 @@
 	</head>
 	<body>
 
-		
+		<style type="text/css">
+			
+			th{
+				border: 1px solid;
+				width: 300px;
+			}
+
+		</style>
 
 		<?php
 			//Funciones extra que he utilizado para gestionar la agenda
@@ -41,7 +48,17 @@
 			// REALIZAR COMPROBACIONES NECESARIAS
 
 
-			
+			if(!isset($_POST['nombre'])  || $_POST['nombre'] === ""){		//comprobacion del input 'nombre' y si esta vacio muestra un mensaje
+				echo "No has introducido un nombre";
+			}else{
+				if (array_key_exists(strtolower($_POST['nombre']), $array_agenda) && isset($_POST['email'])){  //si el nombre introducido esta en el array (convertido en minuscula) lo borramos con unset 
+						unset($array_agenda[strtolower($_POST['nombre'])]);
+						echo "Contacto con el nombre ".$_POST['nombre'] . " eliminado";
+				}else{
+					$array_agenda[strtolower($_POST['nombre'])]= $_POST['email']; //si el nombre no esta en el array lo agregamos al array asociativo
+					echo "Hemos añadido un nuevo contacto";
+				}
+			}
 
 		}
 		?>
