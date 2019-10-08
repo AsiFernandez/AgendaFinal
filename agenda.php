@@ -51,17 +51,15 @@
 			if(!isset($_POST['nombre'])  || $_POST['nombre'] === "" ){		//comprobacion del input 'nombre' y si esta vacio muestra un mensaje
 				echo "No has introducido un nombre";
 			}else{
-				if (array_key_exists(strtolower($_POST['nombre']), $array_agenda) && !isset($_POST['email']) ){  //si el nombre introducido esta en el array (convertido en minuscula) y no hay correo lo borramos con unset 
+				if (array_key_exists(strtolower($_POST['nombre']), $array_agenda) && array_key_exists(strtolower(!isset($_POST['email'])), $array_agenda) ){  //si el nombre introducido esta en el array (convertido en minuscula) y no hay correo lo borramos con unset 
 						unset($array_agenda[strtolower($_POST['nombre'])]);
+						unset($array_agenda[strtolower($_POST['email'])]);
 						echo "Contacto con el nombre ".$_POST['nombre'] . " eliminado";
 				}else{
-					
 						$array_agenda[strtolower($_POST['nombre'])]= $_POST['email']; //si el nombre no esta en el array lo agregamos al array 	asociativo
-						echo "Añadido contacto con nombre " . $_POST['nombre'];
-					
+						echo "Añadido contacto con nombre " . $_POST['nombre'];					
 				}
 			}
-
 		}
 		?>
 
@@ -69,7 +67,7 @@
 			<!-- Campo oculto para ir almacenando los elementos de la agenda-->
 			<input name="agenda" type="hidden" value="<?php echo  arraytostring ($array_agenda) ?>"/><br>
 			Nombre:<br>
-			<input type="text" name="nombre" value=" <?php echo $_POST['nombre'] ?>"><br><br>
+			<input type="text" name="nombre" value="<?php echo $_POST['nombre'] ?>"><br><br>
 			Email:<br>
 			<input type="text" name="email" value="<?php echo $_POST['email']?>"><br><br> 
 			<button type="submit" name="submit" >Añadir contacto</button>
