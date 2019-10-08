@@ -52,8 +52,8 @@
 				echo "No has introducido un nombre";
 			}else{
 				if (array_key_exists(strtolower($_POST['nombre']), $array_agenda) && array_key_exists(strtolower(!isset($_POST['email'])), $array_agenda) ){  //si el nombre introducido esta en el array (convertido en minuscula) y no hay correo lo borramos con unset 
-						unset($array_agenda[strtolower($_POST['nombre'])]);
-						unset($array_agenda[strtolower($_POST['email'])]);
+						unset($array_agenda[strtolower($_POST['nombre'])], $array_agenda[strtolower($_POST['email'])]);
+						
 						echo "Contacto con el nombre ".$_POST['nombre'] . " eliminado";
 				}else{
 						$array_agenda[strtolower($_POST['nombre'])]= $_POST['email']; //si el nombre no esta en el array lo agregamos al array 	asociativo
