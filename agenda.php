@@ -55,9 +55,11 @@
 						unset($array_agenda[strtolower($_POST['nombre'])], $array_agenda[strtolower($_POST['email'])]);
 						
 						echo "Contacto con el nombre ".$_POST['nombre'] . " eliminado";
+				}elseif (array_key_exists(strtolower($_POST['nombre']), $array_agenda) && array_key_exists(strtolower(isset($_POST['email'])), $array_agenda)) {
+					$array_agenda[strtolower($_POST['nombre'])]= $_POST['email']; //si el nombre no esta en el array lo agregamos al array 	asociativo
+						echo "Añadido contacto con nombre " . $_POST['nombre'];
 				}else{
-						$array_agenda[strtolower($_POST['nombre'])]= $_POST['email']; //si el nombre no esta en el array lo agregamos al array 	asociativo
-						echo "Añadido contacto con nombre " . $_POST['nombre'];					
+						echo "vas mal encaminado";					
 				}
 			}
 		}
